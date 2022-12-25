@@ -1,0 +1,389 @@
+Sun 17 Oct 2021 10:39:32 AM PDT
+Linux csslab6h 4.19.0-17-amd64 #1 SMP Debian 4.19.194-3 (2021-07-18) x86_64 GNU/Linux
+uid=1175921(younesl) gid=2121175921(younesl) groups=2121175921(younesl),605559(lab-access)
+=====================================================
+1. Compiles without warnings with -Wall -Wextra flags
+=====================================================
+=====================================================
+2. Runs and produces correct output
+=====================================================
+test1 complete
+test2 complete
+test3 complete
+Done.
+=====================================================
+3. clang-tidy warnings are fixed
+=====================================================
+=====================================================
+4. clang-format does not find any formatting issues
+=====================================================
+Running clang-format on ./main.cpp
+Running clang-format on ./timespan.cpp
+8c8
+< //this is the << operator method 
+---
+> // this is the << operator method
+10c10,11
+< //this is the initialization of local variables to help with calculations and conditions
+---
+>   // this is the initialization of local variables to help with calculations and
+>   // conditions
+14c15
+< //this checks if the time being passed into it is negative
+---
+>   // this checks if the time being passed into it is negative
+16c17,18
+< //this changes the local temp variables to positive so they can be printed and formatted correctly
+---
+>     // this changes the local temp variables to positive so they can be printed
+>     // and formatted correctly
+20,23c22,29
+< //this if checks if the minutes and the seconds at between 0 - 10 so that it can print a 0 infront of the minutes and seconds values
+< //this is done for the formatting of the output
+<     if (minutesTemp < 10 && minutesTemp >= 0 && secondsTemp < 10 && secondsTemp >= 0) {
+<       out << "-" << hoursTemp << ":" << "0" << minutesTemp << ":" << "0" << secondsTemp;
+---
+>     // this if checks if the minutes and the seconds at between 0 - 10 so that
+>     // it can print a 0 infront of the minutes and seconds values this is done
+>     // for the formatting of the output
+>     if (minutesTemp < 10 && minutesTemp >= 0 && secondsTemp < 10 &&
+>         secondsTemp >= 0) {
+>       out << "-" << hoursTemp << ":"
+>           << "0" << minutesTemp << ":"
+>           << "0" << secondsTemp;
+25,28c31,36
+< //this if checks if only the minutes are between 0 - 10 so that it can print a 0 in front of the minutes value
+< //this is done for the formatting of the output
+<     else if(minutesTemp < 10 && minutesTemp >= 0){
+<       out << "-" << hoursTemp << ":" << "0" << minutesTemp << ":" << secondsTemp;
+---
+>     // this if checks if only the minutes are between 0 - 10 so that it can
+>     // print a 0 in front of the minutes value this is done for the formatting of
+>     // the output
+>     else if (minutesTemp < 10 && minutesTemp >= 0) {
+>       out << "-" << hoursTemp << ":"
+>           << "0" << minutesTemp << ":" << secondsTemp;
+30,31c38,40
+< //this if checks if only the minutes are between 0 - 10 so that it can print a 0 in front of the seconds value
+< //this is done for the formatting of the output
+---
+>     // this if checks if only the minutes are between 0 - 10 so that it can
+>     // print a 0 in front of the seconds value this is done for the formatting of
+>     // the output
+33c42,49
+<       out << "-" << hoursTemp << ":" << minutesTemp << ":" << "0" << secondsTemp;
+---
+>       out << "-" << hoursTemp << ":" << minutesTemp << ":"
+>           << "0" << secondsTemp;
+>     }
+>     // this just else means that neither of the minuets or seconds value are
+>     // between 0 - 10 it just prints a - infront of the time for the correct
+>     // formatting
+>     else {
+>       out << "-" << hoursTemp << ":" << minutesTemp << ":" << secondsTemp;
+35,37d50
+< //this just else means that neither of the minuets or seconds value are between 0 - 10
+< //it just prints a - infront of the time for the correct formatting
+<     else {out << "-" << hoursTemp << ":" << minutesTemp << ":" << secondsTemp;}
+41,58c54,80
+< //this if checks if the minutes are between 0 - 10 so that it can print a 0 infront of the minutes and seconds values
+< //this is done for the formatting of the output
+<   if(ts.getMinute() < 10 && ts.getMinute() >= 0 && ts.getSecond() < 10 && ts.getSecond() >= 0){
+<     out << ts.getHour() << ":" << "0" << ts.getMinute() << ":" << "0" << ts.getSecond();
+<   }
+< //this if checks if only the minutes are between 0 - 10 so that it can print a 0 in front of the minutes value
+< //this is done for the formatting of the output
+<   else if(ts.getMinute() <= 10 && ts.getMinute() >= 0){
+<     out << ts.getHour() << ":" << "0" << ts.getMinute() << ":" << ts.getSecond();
+<   }
+< //this if checks if only the minutes are between 0 - 10 so that it can print a 0 in front of the seconds value
+< //this is done for the formatting of the output
+<   else if(ts.getSecond() <= 10 && ts.getSecond() >= 0){
+<     out << ts.getHour() << ":" << ts.getMinute() << ":" << "0" << ts.getSecond();
+<   }
+< //this else just prints out the values as they are
+< //if it gets to this else than it means that format is correct as is and doesnt need any changes
+<   else{
+---
+>   // this if checks if the minutes are between 0 - 10 so that it can print a 0
+>   // infront of the minutes and seconds values this is done for the formatting of
+>   // the output
+>   if (ts.getMinute() < 10 && ts.getMinute() >= 0 && ts.getSecond() < 10 &&
+>       ts.getSecond() >= 0) {
+>     out << ts.getHour() << ":"
+>         << "0" << ts.getMinute() << ":"
+>         << "0" << ts.getSecond();
+>   }
+>   // this if checks if only the minutes are between 0 - 10 so that it can print
+>   // a 0 in front of the minutes value this is done for the formatting of the
+>   // output
+>   else if (ts.getMinute() <= 10 && ts.getMinute() >= 0) {
+>     out << ts.getHour() << ":"
+>         << "0" << ts.getMinute() << ":" << ts.getSecond();
+>   }
+>   // this if checks if only the minutes are between 0 - 10 so that it can print
+>   // a 0 in front of the seconds value this is done for the formatting of the
+>   // output
+>   else if (ts.getSecond() <= 10 && ts.getSecond() >= 0) {
+>     out << ts.getHour() << ":" << ts.getMinute() << ":"
+>         << "0" << ts.getSecond();
+>   }
+>   // this else just prints out the values as they are
+>   // if it gets to this else than it means that format is correct as is and
+>   // doesnt need any changes
+>   else {
+61c83
+<   
+---
+> 
+65c87
+< //this is the constructor
+---
+> // this is the constructor
+70,75c92,98
+< //this is the method that fixes the time into the best format
+< //it converts all the hours to seconds and all the minutes to seconds
+< //then it sets the hours to as many possible sets of 3600 seconds and subract that from the total number of seconds
+< //then it sets minutes to as man possible sets of 60 seconds and substracts that from the total number of seconds
+< //lastly it sets the seconds to the remainder of all those calculations
+< void TimeSpan::fix(double hour, double minute, double second){
+---
+> // this is the method that fixes the time into the best format
+> // it converts all the hours to seconds and all the minutes to seconds
+> // then it sets the hours to as many possible sets of 3600 seconds and subract
+> // that from the total number of seconds then it sets minutes to as man possible
+> // sets of 60 seconds and substracts that from the total number of seconds lastly
+> // it sets the seconds to the remainder of all those calculations
+> void TimeSpan::fix(double hour, double minute, double second) {
+84,87c107,108
+< //this gets the number of hours that are passed and returns that value
+< int TimeSpan::getHour() const {
+<   return hours;
+< }
+---
+> // this gets the number of hours that are passed and returns that value
+> int TimeSpan::getHour() const { return hours; }
+90,93c111,112
+< //this gets the number of minutes that are passed and returns that value
+< int TimeSpan::getMinute() const { 
+<   return minutes; 
+< }
+---
+> // this gets the number of minutes that are passed and returns that value
+> int TimeSpan::getMinute() const { return minutes; }
+96,99c115,116
+< //this gets the number of seconds that are passed and returns that value
+< int TimeSpan::getSecond() const { 
+<   return seconds; 
+< }
+---
+> // this gets the number of seconds that are passed and returns that value
+> int TimeSpan::getSecond() const { return seconds; }
+102,105c119,122
+< bool TimeSpan::isPositive() const { 
+< //this checks if all the values are greater than or equal to 0
+< //returns true if they are or false if they arent
+<   if (seconds >= 0 && minutes >= 0 && hours >= 0){
+---
+> bool TimeSpan::isPositive() const {
+>   // this checks if all the values are greater than or equal to 0
+>   // returns true if they are or false if they arent
+>   if (seconds >= 0 && minutes >= 0 && hours >= 0) {
+111c128
+< //this is the operator overload + method (addition)
+---
+> // this is the operator overload + method (addition)
+113,114c130,132
+< //returns the sum of two different timesspans's
+<   TimeSpan tsSum(hours + ts.getHour(), minutes + ts.getMinute(), seconds + ts.getSecond());
+---
+>   // returns the sum of two different timesspans's
+>   TimeSpan tsSum(hours + ts.getHour(), minutes + ts.getMinute(),
+>                  seconds + ts.getSecond());
+118c136
+< //this is the operator overload - method (subtraction)
+---
+> // this is the operator overload - method (subtraction)
+120,121c138,140
+< //returns the differece of two different timesspans's
+<   TimeSpan tsSub(hours - ts.getHour(), minutes - ts.getMinute(), seconds - ts.getSecond());
+---
+>   // returns the differece of two different timesspans's
+>   TimeSpan tsSub(hours - ts.getHour(), minutes - ts.getMinute(),
+>                  seconds - ts.getSecond());
+125c144
+< //this is the operator overload * method (multiplication)
+---
+> // this is the operator overload * method (multiplication)
+127c146
+< //returns the product of a timespan and an unsigned integer
+---
+>   // returns the product of a timespan and an unsigned integer
+132,134c151,153
+< //this is the operator overload += method (plus equals)
+< TimeSpan TimeSpan::operator+=(const TimeSpan &ts){
+< //this returns the value equal to that value and a passed through TimeSpan
+---
+> // this is the operator overload += method (plus equals)
+> TimeSpan TimeSpan::operator+=(const TimeSpan &ts) {
+>   // this returns the value equal to that value and a passed through TimeSpan
+139,141c158,161
+< //this is the operator overload -= method (minus equals)
+< TimeSpan TimeSpan::operator-=(const TimeSpan &ts){
+< //this returns the value of the difference of a value and a passed through TimeSpan
+---
+> // this is the operator overload -= method (minus equals)
+> TimeSpan TimeSpan::operator-=(const TimeSpan &ts) {
+>   // this returns the value of the difference of a value and a passed through
+>   // TimeSpan
+146,151c166,173
+< //this is the operator overload == method (is equals)
+< bool TimeSpan::operator==(const TimeSpan &ts) const { 
+< //this returns true if two timespan's have the same hours, minutes, and seconds
+< //this returns false if they do not have the same hours, minutes, and seconds
+<   if(hours == ts.getHour() && minutes == ts.getMinute() && seconds == ts.getSecond()){
+<     return true; 
+---
+> // this is the operator overload == method (is equals)
+> bool TimeSpan::operator==(const TimeSpan &ts) const {
+>   // this returns true if two timespan's have the same hours, minutes, and
+>   // seconds this returns false if they do not have the same hours, minutes, and
+>   // seconds
+>   if (hours == ts.getHour() && minutes == ts.getMinute() &&
+>       seconds == ts.getSecond()) {
+>     return true;
+156,161c178,185
+< //this is the operator overload != method (is not equals)
+< bool TimeSpan::operator!=(const TimeSpan &ts) const { 
+< //this returns true if two timespan's do not have the same hours, minutes, and seconds
+< //this returns false if they do have the same hours, minutes, and seconds
+<   if(hours != ts.getHour() && minutes != ts.getMinute() && seconds != ts.getSecond()){
+<     return true; 
+---
+> // this is the operator overload != method (is not equals)
+> bool TimeSpan::operator!=(const TimeSpan &ts) const {
+>   // this returns true if two timespan's do not have the same hours, minutes,
+>   // and seconds this returns false if they do have the same hours, minutes, and
+>   // seconds
+>   if (hours != ts.getHour() && minutes != ts.getMinute() &&
+>       seconds != ts.getSecond()) {
+>     return true;
+166c190
+< //this is the operator overload > method (greater than)
+---
+> // this is the operator overload > method (greater than)
+168,171c192,197
+< //this converts both of the times in question into seconds
+< //then it compares the two numbers of seconds
+< //if time1 (the first number of total seconds) is greater than time2 (the second number of total seconds) then it returns true
+< //if time1 (the first number of total seconds) is less than or equal to time2 (the second number of total seconds) then it returns false
+---
+>   // this converts both of the times in question into seconds
+>   // then it compares the two numbers of seconds
+>   // if time1 (the first number of total seconds) is greater than time2 (the
+>   // second number of total seconds) then it returns true if time1 (the first
+>   // number of total seconds) is less than or equal to time2 (the second number
+>   // of total seconds) then it returns false
+175,176c201,202
+<   if(time1 > time2){
+<     return true; 
+---
+>   if (time1 > time2) {
+>     return true;
+181,186c207,214
+< //this is the operator overload < method (less than)
+< bool TimeSpan::operator<(const TimeSpan &ts) const { 
+< //this converts both of the times in question into seconds
+< //then it compares the two numbers of seconds
+< //if time1 (the first number of total seconds) is less than time2 (the second number of total seconds) then it returns true
+< //if time1 (the first number of total seconds) is greater than or equal to time2 (the second number of total seconds) then it returns false
+---
+> // this is the operator overload < method (less than)
+> bool TimeSpan::operator<(const TimeSpan &ts) const {
+>   // this converts both of the times in question into seconds
+>   // then it compares the two numbers of seconds
+>   // if time1 (the first number of total seconds) is less than time2 (the second
+>   // number of total seconds) then it returns true if time1 (the first number of
+>   // total seconds) is greater than or equal to time2 (the second number of total
+>   // seconds) then it returns false
+189,190c217,218
+<   if(time1 < time2){
+<     return true; 
+---
+>   if (time1 < time2) {
+>     return true;
+195c223
+< //this is the operator overload <= method (less than or equal to)
+---
+> // this is the operator overload <= method (less than or equal to)
+197,200c225,230
+< //this converts both of the times in question into seconds
+< //then it compares the two numbers of seconds
+< //if time1 (the first number of total seconds) is less than or equal to time2 (the second number of total seconds) then it returns true
+< //if time1 (the first number of total seconds) is greater than time2 (the second number of total seconds) then it returns false
+---
+>   // this converts both of the times in question into seconds
+>   // then it compares the two numbers of seconds
+>   // if time1 (the first number of total seconds) is less than or equal to time2
+>   // (the second number of total seconds) then it returns true if time1 (the
+>   // first number of total seconds) is greater than time2 (the second number of
+>   // total seconds) then it returns false
+203,204c233,234
+<   if(time1 <= time2){
+<     return true; 
+---
+>   if (time1 <= time2) {
+>     return true;
+209,214c239,246
+< //this is the operator overload > method (greater than)
+< bool TimeSpan::operator>=(const TimeSpan &ts) const { 
+< //this converts both of the times in question into seconds
+< //then it compares the two numbers of seconds
+< //if time1 (the first number of total seconds) is greater than or equal to time2 (the second number of total seconds) then it returns true
+< //if time1 (the first number of total seconds) is less than time2 (the second number of total seconds) then it returns false
+---
+> // this is the operator overload > method (greater than)
+> bool TimeSpan::operator>=(const TimeSpan &ts) const {
+>   // this converts both of the times in question into seconds
+>   // then it compares the two numbers of seconds
+>   // if time1 (the first number of total seconds) is greater than or equal to
+>   // time2 (the second number of total seconds) then it returns true if time1
+>   // (the first number of total seconds) is less than time2 (the second number of
+>   // total seconds) then it returns false
+217,218c249,250
+<   if(time1 >= time2){
+<     return true; 
+---
+>   if (time1 >= time2) {
+>     return true;
+=====================================================
+5. No memory leaks using g++
+=====================================================
+=====================================================
+6. No memory leaks using valgrind, look for "definitely lost" 
+=====================================================
+==190262== Memcheck, a memory error detector
+==190262== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==190262== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
+==190262== Command: ./a.out
+==190262== Parent PID: 190175
+==190262== 
+==190262== 
+==190262== HEAP SUMMARY:
+==190262==     in use at exit: 0 bytes in 0 blocks
+==190262==   total heap usage: 2 allocs, 2 frees, 76,800 bytes allocated
+==190262== 
+==190262== All heap blocks were freed -- no leaks are possible
+==190262== 
+==190262== For counts of detected and suppressed errors, rerun with: -v
+==190262== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+=====================================================
+7. Tests have full code coverage
+=====================================================
+./create-output.sh: line 126: ./check-code-coverage.sh: Permission denied
+Sun 17 Oct 2021 10:39:41 AM PDT
+=====================================================
+To create an output.txt file with all the output from this script
+Run the below command
+      ./create-output.sh > output.txt 2>&1 
+=====================================================
